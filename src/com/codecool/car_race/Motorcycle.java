@@ -16,10 +16,17 @@ public class Motorcycle extends Vehicle {
     }
 
     @Override
+    void setType() {
+        type = "motorcycle";
+    }
+
+    @Override
     void prepareForLap(Race race) {
         if (race.isRainingNow()) {
             int speedDiff = Util.getRandomInt(5, 50);
             actualSpeed -= speedDiff;
+        } else {
+            actualSpeed = normalSpeed;
         }
     } // setup the actual speed used for the current lap
 

@@ -15,7 +15,8 @@ public class Race {
             rainingNow = weather.isRaining();
             for (Vehicle vehicle : vehicles
             ) {
-
+                vehicle.prepareForLap(this);
+                vehicle.moveForAnHour();
             }
         }
     } // simulates the race by
@@ -27,10 +28,24 @@ public class Race {
     }
 
     public void printRaceResults() {
-
+        for (Vehicle vehicle : vehicles
+             ) {
+            StringBuilder sb = new StringBuilder();
+            String name = vehicle.getName();
+            int distance = vehicle.getDistanceTraveled();
+            String type = vehicle.getType();
+            String toPrint = sb.append(name).append(" ").append(distance).append(" ").append(type).toString();
+            System.out.println(toPrint);
+        }
     } // prints each vehicle's name, distance traveled and type.
 
     public boolean isThereABrokenTruck() {
-        return true;
+        for (int i = 0; i < 10; i++) {
+            Vehicle truck = vehicles.get(i);
+            if (truck.isBrokenDown()) {
+                return true;
+            }
+        }
+        return false;
     } // returns true if there is a broken truck on track
 }

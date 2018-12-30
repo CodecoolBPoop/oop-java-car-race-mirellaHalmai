@@ -10,11 +10,18 @@ public class Main {
      * Creates all the vehicles that will be part of this race.
      */
     private static void createVehicles(Race race) {
-        for (int i = 0; i < 10; i++) {
-            Vehicle car = new Car();
-            Vehicle truck = new Truck();
-            Vehicle motorcycle = new Motorcycle();
-            race.vehicles.addAll(Arrays.asList(car, truck, motorcycle));
+        for (int i = 0; i < 30; i++) {
+            if (i < 10) {
+                Vehicle truck = new Truck();
+                race.vehicles.add(truck);
+            } else if (i < 20) {
+                Vehicle car = new Car();
+                race.vehicles.add(car);
+            } else {
+                Vehicle motorcycle = new Motorcycle();
+                race.vehicles.add(motorcycle);
+            }
+
         }
     }
 

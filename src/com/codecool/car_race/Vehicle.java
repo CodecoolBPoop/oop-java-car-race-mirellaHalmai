@@ -1,12 +1,24 @@
 package com.codecool.car_race;
 
-import java.util.Random;
-
 abstract class Vehicle {
 
-    int actualSpeed;
-    int normalSpeed;
-    int distanceTraveled = 0;
+    private int actualSpeed;
+    private int normalSpeed = 100;
+    private int distanceTraveled = 0;
+
+    private String name;
+    private String type;
+
+    public Vehicle() {
+        name = createName();
+        type = getType();
+    }
+
+    public Vehicle(int normalSpeed) {
+        name = createName();
+        type = getType();
+        this.normalSpeed = normalSpeed;
+    }
 
     public String getName() {
         return name;
@@ -16,26 +28,19 @@ abstract class Vehicle {
         return type;
     }
 
-    String name;
-    String type;
-
-    public Vehicle() {
-        setName();
-        setNormalSpeed();
-        setType();
+    void prepareForLap(Race race) {
         actualSpeed = normalSpeed;
     }
 
-    abstract void prepareForLap(Race race);
-
-    abstract void setName();
-
-    abstract void setType();
+    abstract String createName();
 
 
+    public void setActualSpeed(int actualSpeed) {
+        this.actualSpeed = actualSpeed;
+    }
 
-    void setNormalSpeed() {
-        normalSpeed = 100;
+    public int getNormalSpeed() {
+        return normalSpeed;
     }
 
     void moveForAnHour() {
@@ -47,9 +52,6 @@ abstract class Vehicle {
     }
 
     boolean isBrokenDown() {
-        if (actualSpeed == 0) {
-            return true;
-        }
-        return false;
+        return actualSpeed == 0;
     }
 }

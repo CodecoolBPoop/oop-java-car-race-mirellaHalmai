@@ -8,25 +8,24 @@ public class Motorcycle extends Vehicle {
     private int motorcycleNumber; // The number of the instance created. Used for its name.
 
     @Override
-    void setName() {
+    String createName() {
         motorcycleNumber = numberOfMotorcycles + 1;
         numberOfMotorcycles++;
-        StringBuilder sb = new StringBuilder();
-        name = sb.append("Motorcycle ").append(motorcycleNumber).toString();
+        StringBuilder sb = new StringBuilder("Motorcycle ");
+        return sb.append(motorcycleNumber).toString();
     }
 
     @Override
-    void setType() {
-        type = "motorcycle";
+    public String getType() {
+        return "motorcycle";
     }
 
     @Override
     void prepareForLap(Race race) {
+        super.prepareForLap(race);
         if (race.isRainingNow()) {
-            int speedDiff = Util.getRandomInt(5, 50);
-            actualSpeed -= speedDiff;
-        } else {
-            actualSpeed = normalSpeed;
+            int actualSpeed = super.getNormalSpeed() - Util.getRandomInt(5, 50);
+            super.setActualSpeed(actualSpeed);
         }
     } // setup the actual speed used for the current lap
 

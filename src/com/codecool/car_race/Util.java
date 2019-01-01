@@ -11,9 +11,6 @@ public class Util {
 
     static boolean getRandomChance(int percent) {
         int chance = Util.getRandomInt(0, 100);
-        if (chance < percent + 1) {
-            return true;
-        }
-        return false;
+        return chance < percent + 1;
     }
 }

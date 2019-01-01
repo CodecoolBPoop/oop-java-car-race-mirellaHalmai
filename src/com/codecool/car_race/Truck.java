@@ -6,14 +6,14 @@ public class Truck extends Vehicle {
 
     // Truck drivers are boring. They call all their trucks a random number between 0 and 1000.
     @Override
-    void setName() {
-        name = String.valueOf(Util.getRandomInt(0, 1000));
+    String createName() {
+        return String.valueOf(Util.getRandomInt(0, 1000));
     }
 
     // 5% chance of breaking down for 2 turns.
     @Override
-    void setType() {
-        type = "truck";
+    public String getType() {
+        return "truck";
     }
 
     @Override
@@ -21,10 +21,10 @@ public class Truck extends Vehicle {
         if (breakdownTurnsLeft > 0) {
             breakdownTurnsLeft--;
         } else if (Util.getRandomChance(5)) {
-            actualSpeed = 0;
+            super.setActualSpeed(0);
             breakdownTurnsLeft = 1;
         } else {
-            actualSpeed = normalSpeed;
+            super.prepareForLap(race);
         }
     }
 }

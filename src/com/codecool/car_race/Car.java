@@ -11,31 +11,30 @@ public class Car extends Vehicle {
             "Eternity", "Obsidian", "Legend", "Utopia", "Titan")
     );
 
+    public Car() {
+        super(Util.getRandomInt(80, 110));
+    }
+
     // the normal speed of the car. Set to a random number in the constructor between 80-110km/h.
-    @Override
-    void setNormalSpeed() {
-        normalSpeed = Util.getRandomInt(80, 110);
-    }
 
     @Override
-    void setName() {
+    String createName() {
         Collections.shuffle(carNames);
-        StringBuilder sb = new StringBuilder();
-        name = sb.append(carNames.get(0)).append(" ").append(carNames.get(1)).toString();
+        StringBuilder sb = new StringBuilder(carNames.get(0));
+        return sb.append(" ").append(carNames.get(1)).toString();
     }
 
     @Override
-    void setType() {
-        type = "car";
+    public String getType() {
+        return "car";
     }
 
     // If there is a broken down Truck on the track, then limit the max speed of cars to 75 km/h.
     @Override
     void prepareForLap(Race race) {
+        super.prepareForLap(race);
         if (race.isThereABrokenTruck()) {
-            actualSpeed = 75;
-        } else {
-            actualSpeed = normalSpeed;
+            super.setActualSpeed(75);
         }
     } // setup the actual speed used for the current lap
 }
